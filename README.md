@@ -36,7 +36,7 @@ Example of the release types that will be done based on a commit messages:
 ```yaml
    steps:
     - name: Auto Increment Semver Action
-      uses: MCKanpolat/auto-semver-action@1.0.5
+      uses: MCKanpolat/auto-semver-action@v1
       id: versioning
       with:
         releaseType: patch 
