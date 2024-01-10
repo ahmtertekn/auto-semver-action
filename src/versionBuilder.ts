@@ -1,8 +1,8 @@
 import * as core from '@actions/core'
 import semver from 'semver'
-import {isMatch} from 'matcher'
+import * as matcher from 'matcher'
 import * as github from '@actions/github'
-import {Context} from '@actions/github/lib/context'
+import { Context } from '@actions/github/lib/context'
 
 const releaseTypeOrder = [
   'major',
@@ -39,7 +39,7 @@ export function increment(
     let msgMatch = false
     for (const [key, value] of Object.entries(defaultConfig)) {
       for (const releaseType of value) {
-        if (isMatch(message, `*#${releaseType}*`)) {
+        if (matcher.isMatch(message, `*#${releaseType}*`)) {
           matchedLabels.push(key)
           msgMatch = true
         }
@@ -89,10 +89,10 @@ export function increment(
 export async function getMostRecentVersionFromTags(
   context: Context
 ): Promise<semver.SemVer> {
-  const token = core.getInput('github_token', {required: true})
+  const token = core.getInput('github_token', { required: true })
   const octokit = github.getOctokit(token)
 
-  const {data: refs} = await octokit.rest.git.listMatchingRefs({
+  const { data: refs } = await octokit.rest.git.listMatchingRefs({
     owner: context.repo.owner,
     repo: context.repo.repo,
     ref: 'tags/'
@@ -100,7 +100,7 @@ export async function getMostRecentVersionFromTags(
 
   const versions = refs
     .map(ref =>
-      semver.parse(ref.ref.replace(/^refs\/tags\//g, ''), {loose: true})
+      semver.parse(ref.ref.replace(/^refs\/tags\//g, ''), { loose: true })
     )
     .filter(version => version !== null)
     .sort((a, b) =>

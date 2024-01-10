@@ -1,6 +1,6 @@
 {
   "name": "auto-semver-action",
-  "version": "1.0.8",
+  "version": "1.0.11",
   "private": true,
   "description": "Generates a new version using Commit Message Syntax with Semver",
   "main": "lib/main.js",
@@ -25,10 +25,10 @@
   "author": "MCKanpolat",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.10.0",
-    "@actions/github": "^5.1.1",
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
     "matcher": "^5.0.0",
-    "semver": "^7.3.8"
+    "semver": "^7.5.4"
   },
   "devDependencies": {
     "@types/jest": "^29.2.3",
